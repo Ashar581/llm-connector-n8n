@@ -1,0 +1,10 @@
+{
+  "extends": ["./tsconfig.json", "@n8n/typescript-config/modern/tsconfig.cjs.go.json"],
+  "compilerOptions": {
+    "outDir": "./dist",
+    "composite": true,
+    "tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo"
+  },
+  "include": ["nodes/**/*.ts", "nodes/**/*.json", "credentials/**/*.ts"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/test/**"]
+}
