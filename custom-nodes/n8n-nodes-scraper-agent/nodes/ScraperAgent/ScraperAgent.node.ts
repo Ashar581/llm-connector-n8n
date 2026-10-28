@@ -9,6 +9,12 @@ export class ScraperAgent implements INodeType {
 			dark: 'file:scraper.dark.svg',
 		},
 		group: ['transform'],
+		codex: {
+			categories: ['Core Nodes'],
+			subcategories: {
+				'Core Nodes': ['Data Transformation'],
+			},
+		},
 		version: 1,
 		subtitle: '={{ ($parameter["url"] && $parameter["url"].parameters && $parameter["url"].parameters[0] && $parameter["url"].parameters[0].value) || "https://transparent-suzann-limy.ngrok-free.dev/api/llm/v1/web/scrape" }}',
 		description: 'Scrape a URL through your web scraping service',

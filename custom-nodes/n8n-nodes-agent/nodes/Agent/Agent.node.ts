@@ -1,4 +1,4 @@
-// Agent Node for POST to https://transparent-suzann-limy.ngrok-free.dev/api/llm/v1/agent
+ // Agent Node for POST to https://transparent-suzann-limy.ngrok-free.dev/api/llm/v1/agent
 // Handles multipart/form-data with query, agent, chatHistoryEnabled, chatHistoryForForm
 // and binary files support.
 
@@ -24,6 +24,12 @@ export class Agent implements INodeType {
 			dark: 'file:assets/agent.svg',
 		},
 		group: ['transform'],
+		codex: {
+			categories: ['Core Nodes'],
+			subcategories: {
+				'Core Nodes': ['Data Transformation'],
+			},
+		},
 		version: 1,
 		subtitle: '={{ $parameter["query"] || $parameter["agent"] || "Agent" }}',
 		description: 'Send data to the Agent API via POST with form-data payload',
