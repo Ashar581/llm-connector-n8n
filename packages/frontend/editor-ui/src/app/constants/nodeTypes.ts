@@ -115,7 +115,7 @@ export const DATA_TABLE_NODE_TYPE = 'n8n-nodes-base.dataTable';
 export const DATA_TABLE_TOOL_NODE_TYPE = 'n8n-nodes-base.dataTableTool';
 export const MESSAGE_AN_AGENT_NODE_TYPE = 'n8n-nodes-base.messageAnAgent';
 export const TIME_SAVED_NODE_TYPE = 'n8n-nodes-base.timeSaved';
-export const SCRAPER_AGENT_NODE_TYPE = 'CUSTOM.scraperAgent';
+export const SCRAPER_AGENT_NODE_TYPE = 'n8n-nodes-scraper-agent.scraperAgent';
 
 export { CREDENTIAL_ONLY_NODE_PREFIX } from 'n8n-workflow';
 

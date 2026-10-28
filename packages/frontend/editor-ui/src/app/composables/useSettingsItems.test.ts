@@ -97,27 +97,41 @@ describe('useSettingsItems', () => {
 			vi.mocked(hasPermission).mockReturnValue(true);
 			// Module items in registration order, with the orders the real modules set.
 			settingsSidebarItems.value = [
+				{ id: 'settings-log-streaming', available: true, order: 170 },
 				{ id: 'settings-mcp', available: true, order: 200 },
+				{ id: 'settings-chat-hub', available: true, order: 220 },
+				{ id: 'settings-instance-ai', available: true, order: 230 },
+				{ id: 'settings-agents', available: true, order: 240 },
 				{ id: 'settings-opentelemetry', available: true },
 			];
 
 			const ids = useSettingsItems().settingsItems.value.map(({ id }) => id);
 
 			expect(ids).toEqual([
+				'settings-usage-and-plan',
 				'settings-personal',
 				'settings-users',
 				'settings-ai',
 				'settings-n8n-connect',
+				'settings-roles',
 				'settings-api',
+				'settings-external-secrets',
 				'settings-credential-resolvers',
+				'settings-source-control',
 				'settings-promotions',
+				'settings-sso',
 				'settings-encryption-keys',
 				'settings-security',
+				'settings-ldap',
 				'settings-workersview',
+				'settings-log-streaming',
 				'settings-community-nodes',
 				'settings-migration-report',
 				'settings-mcp',
 				'settings-context',
+				'settings-chat-hub',
+				'settings-instance-ai',
+				'settings-agents',
 				'settings-opentelemetry',
 			]);
 		});
@@ -198,11 +212,11 @@ describe('useSettingsItems', () => {
 			promotionsFlag.value = 'true';
 		});
 
-		it('appears directly after Credential Resolvers when enabled', () => {
+		it('appears directly after Environments when enabled', () => {
 			const items = useSettingsItems().settingsItems.value;
-			const credResolversIndex = items.findIndex(({ id }) => id === 'settings-credential-resolvers');
+			const environmentsIndex = items.findIndex(({ id }) => id === 'settings-source-control');
 
-			expect(items[credResolversIndex + 1]).toMatchObject({
+			expect(items[environmentsIndex + 1]).toMatchObject({
 				id: 'settings-promotions',
 				route: { to: { name: PROMOTIONS_SETTINGS_VIEW } },
 			});

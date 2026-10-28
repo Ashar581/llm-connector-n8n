@@ -121,11 +121,11 @@ describe('InstanceAiModule settings page access', () => {
 	const isSettingsPageAvailable = () => InstanceAiModule.settingsPages?.[0]?.available;
 
 	describe('a viewer who can manage Instance AI', () => {
-		it('is not offered the settings page, because the entry is removed', () => {
-			expect(isSettingsPageAvailable()).toBe(false);
+		it('is offered the settings page', () => {
+			expect(isSettingsPageAvailable()).toBe(true);
 		});
 
-		it('can still reach the settings page via direct URL, because the route guard is separate from the sidebar entry', async () => {
+		it('reaches the settings page', async () => {
 			const router = createTestRouter();
 			await router.push('/settings/assistant');
 
@@ -154,6 +154,42 @@ describe('InstanceAiModule settings page access', () => {
 			await router.push('/settings/instance-ai');
 
 			expect(router.currentRoute.value.name).toBe(VIEWS.HOMEPAGE);
+		});
+	});
+
+	// Experiment cleanup: remove with openWorkflowInAssistant.
+	describe('a member in the openWorkflowInAssistant treatment', () => {
+		beforeEach(() => {
+			setGlobalScopes(GLOBAL_MEMBER_SCOPES);
+			setOpenWorkflowInAssistantTreatment(true);
+		});
+
+		it('is offered the settings page, which holds their default editor row', () => {
+			expect(isSettingsPageAvailable()).toBe(true);
+		});
+
+		it('reaches the settings page', async () => {
+			const router = createTestRouter();
+			await router.push('/settings/assistant');
+
+			expect(router.currentRoute.value.name).toBe(INSTANCE_AI_SETTINGS_VIEW);
+		});
+
+		describe('while the assistant is off, which hides the row', () => {
+			beforeEach(() => {
+				setAssistantEnabled(false);
+			});
+
+			it('is not offered the settings page', () => {
+				expect(isSettingsPageAvailable()).toBe(false);
+			});
+
+			it('is sent to the homepage', async () => {
+				const router = createTestRouter();
+				await router.push('/settings/assistant');
+
+				expect(router.currentRoute.value.name).toBe(VIEWS.HOMEPAGE);
+			});
 		});
 	});
 });

@@ -114,3 +114,38 @@ describe('MainSidebarHeader', () => {
 	});
 
 	it('renders the command bar button by default', () => {
+		const { queryByRole } = createComponentRenderer(MainSidebarHeader, {
+			pinia,
+			props: { isCollapsed: false, hideCreate: true },
+		})();
+
+		expect(queryByRole('button', { name: 'Open command palette' })).toBeInTheDocument();
+	});
+
+	it('hides the command bar button in canvas-only mode', () => {
+		settingsStore.settings = { ...defaultSettings, canvasOnly: true };
+
+		const { queryByRole } = createComponentRenderer(MainSidebarHeader, {
+			pinia,
+			props: { isCollapsed: false, hideCreate: true },
+		})();
+
+		expect(queryByRole('button', { name: 'Open command palette' })).not.toBeInTheDocument();
+	});
+
+	it('emits "openCommandBar" with the click event when command bar button is clicked', async () => {
+		const { getByRole, emitted } = createComponentRenderer(MainSidebarHeader, {
+			pinia,
+			props: { isCollapsed: false, hideCreate: true },
+		})();
+
+		await fireEvent.click(getByRole('button', { name: 'Open command palette' }));
+
+		const emits = emitted('openCommandBar');
+		expect(emits).toHaveLength(1);
+
+		const [[event]] = emits as Array<[Event]>;
+		expect(event).toBeInstanceOf(MouseEvent);
+		expect((event as MouseEvent).type).toBe('click');
+	});
+});

@@ -3,9 +3,7 @@
 	"compilerOptions": {
 		"outDir": "./dist",
 		"rootDir": ".",
-		"paths": {
-			"n8n-workflow": ["../../workflow/src"]
-		}
+		"moduleResolution": "bundler"
 	},
 	"include": ["nodes/**/*", "nodes/**/*.json", "credentials/**/*", "package.json"],
 	"exclude": ["node_modules", "dist", "**/*.test.ts", "**/test/**"]

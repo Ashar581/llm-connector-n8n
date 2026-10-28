@@ -23,7 +23,15 @@ describe('LogStreamingModule', () => {
 			setActivePinia(createPinia());
 		});
 
-		it('is never available, because the entry is removed', () => {
+		it('should be available to a user with the logStreaming:manage scope', () => {
+			useRBACStore().setGlobalScopes(['logStreaming:manage']);
+
+			expect(item().available).toBe(true);
+		});
+
+		it('should be hidden from a user without the logStreaming:manage scope', () => {
+			useRBACStore().setGlobalScopes(['workflow:read']);
+
 			expect(item().available).toBe(false);
 		});
 	});

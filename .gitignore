@@ -69,6 +69,13 @@ packages/cli/src/modules/my-feature
 .secrets
 act-event.json
 packages/quality/**/.cursor/rules/
+
+# Build artifacts in source directories
+packages/workflow/src/*.js
+packages/workflow/src/*.js.map
+packages/workflow/src/*.d.ts
+packages/workflow/src/*.d.ts.map
+
 .venv
 .ruff_cache
 __pycache__
